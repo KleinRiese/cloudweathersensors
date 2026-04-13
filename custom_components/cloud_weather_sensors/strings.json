@@ -1,0 +1,43 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Cloud Weather Sensors",
+        "description": "Gib deine Netatmo API-Zugangsdaten an (aus dev.netatmo.com).",
+        "data": {
+          "client_id": "Client ID",
+          "client_secret": "Client Secret",
+          "refresh_token": "Refresh Token"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Netatmo neu authentifizieren",
+        "description": "Bitte gib aktualisierte Netatmo-Zugangsdaten ein.",
+        "data": {
+          "client_id": "Client ID",
+          "client_secret": "Client Secret",
+          "refresh_token": "Refresh Token"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung fehlgeschlagen.",
+      "auth": "Authentifizierung fehlgeschlagen.",
+      "unknown": "Unerwarteter Fehler."
+    },
+    "abort": {
+      "single_instance_allowed": "Diese Integration ist bereits konfiguriert.",
+      "reauth_successful": "Neu-Authentifizierung erfolgreich."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Optionen",
+        "data": {
+          "scan_interval": "Abfrageintervall (Sekunden)"
+        }
+      }
+    }
+  }
+}

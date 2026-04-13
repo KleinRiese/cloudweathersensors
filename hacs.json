@@ -1,0 +1,8 @@
+{
+  "name": "Cloud Weather Sensors",
+  "content_in_root": false,
+  "render_readme": true,
+  "domains": [
+    "cloud_weather_sensors"
+  ]
+}

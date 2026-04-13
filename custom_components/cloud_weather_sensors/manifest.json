@@ -1,0 +1,11 @@
+{
+  "domain": "cloud_weather_sensors",
+  "name": "Cloud Weather Sensors",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://github.com/KleinRiese/cloudweathersensors",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "1.0.0"
+}
