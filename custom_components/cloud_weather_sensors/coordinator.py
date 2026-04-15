@@ -36,9 +36,14 @@ class NetatmoFavoritesCoordinator(DataUpdateCoordinator[dict]):
             await self._persist_refresh_token_if_changed()
             return self._normalize(data)
         except NetatmoAuthError as err:
-            raise ConfigEntryAuthFailed(f"Netatmo auth error: {err}") from err
+            _LOGGER.error("Permanent authentication error, reauthentication required: %s", err)
+            raise ConfigEntryAuthFailed("Netatmo authentication failed") from err
         except NetatmoCommError as err:
-            raise UpdateFailed(f"Netatmo communication error: {err}") from err
+            _LOGGER.warning("Temporary communication error while updating weather data: %s", err)
+            raise UpdateFailed(f"Temporary Netatmo communication error: {err}") from err
+        except Exception as err:
+            _LOGGER.exception("Unexpected update error")
+            raise UpdateFailed(f"Unexpected update error: {err}") from err
 
     async def _persist_refresh_token_if_changed(self) -> None:
         current = self.entry.data.get(CONF_REFRESH_TOKEN)
@@ -46,6 +51,7 @@ class NetatmoFavoritesCoordinator(DataUpdateCoordinator[dict]):
         if not latest or latest == current:
             return
 
+        _LOGGER.debug("Persisting rotated refresh token into config entry")
         new_data = dict(deepcopy(self.entry.data))
         new_data[CONF_REFRESH_TOKEN] = latest
         self.hass.config_entries.async_update_entry(self.entry, data=new_data)
